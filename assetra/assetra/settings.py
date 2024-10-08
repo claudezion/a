@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-d-t@8f*()=tpzk!)h%zzdjr%6_cw%yoomn7uh*$8v3q=j2lyox
 DEBUG = False
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-ALLOWED_HOSTS = ['gtxadmin.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
