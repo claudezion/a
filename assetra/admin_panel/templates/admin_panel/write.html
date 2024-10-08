@@ -1,0 +1,112 @@
+{% extends "admin_panel/layout.html" %} {% load static %} {% block body %}
+<div class="container rounded-xl bg-base-200 shadow h-full px-16 py-6">
+  <div class="flex justify-between items-center mb-6">
+    <div class="text-left">
+      <h5 class="h5 font-semibold">Write</h5>
+      <h6 class="h6 font-normal">On Ecosystem</h6>
+    </div>
+    <div class="flex items-center">
+      <form method="GET" action="{% url 'search_blogs' %}" class="mr-4">
+        <input
+          type="text"
+          id="defult-search"
+          name="search_term"
+          class="block w-[20dvw] h-2/3 p-4 ps-10 text-sm rounded-full"
+          placeholder="Search by username or email"
+        />
+      </form>
+    </div>
+  </div>
+  <div class="p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-custom-gradient shadow-lg rounded-lg overflow-hidden">
+        <a
+          href="{% url 'write_blog' %}"
+          class="block p-6 transition hover:bg-gray-100"
+        >
+          <h2 class="text-lg font-semibold">Write Blogs</h2>
+          <p class="mt-2 text-gray-600">
+            Create and publish new blog posts easily.
+          </p>
+        </a>
+      </div>
+      <div class="bg-custom-gradient shadow-lg rounded-lg overflow-hidden">
+        <a
+          href="{% url 'blog_overview' %}"
+          class="block p-6 transition hover:bg-gray-100"
+        >
+          <h2 class="text-lg font-semibold">Blog Overview</h2>
+          <p class="mt-2 text-gray-600">
+            Browse and manage all your published blog posts.
+          </p>
+        </a>
+      </div>
+      <div class="bg-custom-gradient shadow-lg rounded-lg overflow-hidden">
+        <a
+          href="{% url 'blog_list' %}"
+          class="block p-6 transition hover:bg-gray-100"
+        >
+          <h2 class="text-lg font-semibold">View Blog List</h2>
+          <p class="mt-2 text-gray-600">
+            Browse and manage all your published blog posts.
+          </p>
+        </a>
+      </div>
+      <div class="bg-custom-gradient shadow-lg rounded-lg overflow-hidden">
+        <a
+          href="{% url 'edit_blog_list' %}"
+          class="block p-6 transition hover:bg-gray-100"
+        >
+          <h2 class="text-lg font-semibold">Edit Blogs</h2>
+          <p class="mt-2 text-gray-600">
+            Modify existing blog posts as needed.
+          </p>
+        </a>
+      </div>
+      <div class="bg-custom-gradient shadow-lg rounded-lg overflow-hidden">
+        <a
+          href="{% url 'search_blogs' %}"
+          class="block p-6 transition hover:bg-gray-100"
+        >
+          <h2 class="text-lg font-semibold">Search Blogs by Author</h2>
+          <p class="mt-2 text-gray-600">
+            Find specific blogs by author name or email.
+          </p>
+        </a>
+      </div>
+      <div class="bg-custom-gradient shadow-lg rounded-lg overflow-hidden">
+        <a
+          href="{% url 'edit_search_blogs' %}"
+          class="block p-6 transition hover:bg-gray-100"
+        >
+          <h2 class="text-lg font-semibold">Search Blogs by Author for Editing</h2>
+          <p class="mt-2 text-gray-600">
+            Find specific blogs by author name or email when editing a blog.
+          </p>
+        </a>
+      </div>
+      <div class="bg-custom-gradient shadow-lg rounded-lg overflow-hidden">
+        <a
+          href="{% url 'blog_list' %}"
+          class="block p-6 transition hover:bg-gray-100"
+        >
+          <h2 class="text-lg font-semibold">View Forum Post List</h2>
+          <p class="mt-2 text-gray-600">Browse and manage all forum posts.</p>
+        </a>
+      </div>
+      <div class="bg-custom-gradient shadow-lg rounded-lg overflow-hidden">
+        <a
+          href="{% url 'search_blogs' %}"
+          class="block p-6 transition hover:bg-gray-100"
+        >
+          <h2 class="text-lg font-semibold">Search Forum Post by Author</h2>
+          <p class="mt-2 text-gray-600">
+            Find specific forum post by author name or email.
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

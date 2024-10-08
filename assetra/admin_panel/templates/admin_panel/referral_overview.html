@@ -1,0 +1,72 @@
+{% extends "admin_panel/layout.html" %} {% block body %}
+<div class="container rounded-xl bg-base-200 shadow h-full px-16 py-6">
+  <div id="referrals-view">
+    <div class="flex justify-between items-center mb-6">
+      <div class="text-left">
+        <h5 class="h5 font-semibold">Referral Overview</h5>
+        <h6 class="h6 font-normal">On Ecosystem</h6>
+      </div>
+      <div class="flex items-center">
+        <form method="GET" action="{% url 'user_referrals' %}" class="mr-4">
+          <input
+            type="text"
+            id="defult-search"
+            name="search_term"
+            class="block w-[20dvw] h-2/3 p-4 ps-10 text-sm rounded-full"
+            placeholder="Search by username or email"
+          />
+        </form>
+        <button type="button" class="text-[16px] font-normal">
+          Sort By: Date {{order}}
+        </button>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-blue-100 p-4 rounded-lg">
+        <h2 class="text-xl font-semibold text-blue-800">Total Referrals</h2>
+        <p class="text-3xl font-bold text-blue-600">
+          {{ total_referrals.count }}
+        </p>
+      </div>
+      <div class="bg-green-100 p-4 rounded-lg">
+        <h2 class="text-xl font-semibold text-green-800">
+          Successful Referrals
+        </h2>
+        <p class="text-3xl font-bold text-green-600">
+          {{ successful_referrals }}
+        </p>
+      </div>
+      <div class="bg-red-100 p-4 rounded-lg">
+        <h2 class="text-xl font-semibold text-red-800">
+          Unsuccessful Referrals
+        </h2>
+        <p class="text-3xl font-bold text-red-600">
+          {{ unsuccessful_referrals }}
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-4">All Referrals:</h3>
+      <ul class="space-y-2 overflow-y-auto max-h-[400px] scrollbar-hide">
+        {% for referral in total_referrals %}
+        <li class="bg-gray-50 p-3 rounded-lg flex justify-between items-center">
+          <span class="text-gray-800">
+            <span class="font-medium">{{ referral.referred_by.username }}</span>
+            referred
+            <span class="font-medium"
+              >{{referral.referred_user.username }}</span
+            >
+          </span>
+          <span
+            class="{% if referral.success %}text-green-600{% else %}text-red-600{% endif %} font-medium"
+          >
+            {{ referral.success | yesno:"Success,Unsuccessful" }}
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

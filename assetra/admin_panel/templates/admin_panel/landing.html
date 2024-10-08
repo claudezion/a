@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Assetra{% endblock %}</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+  </head>
+  <body
+    class="container min-w-[100dvw] min-h-[100dvh] bg-custom-gradient flex items-center justify-center"
+  >
+    <div class="container mx-auto py-10 px-4">
+      <div class="mb-8 flex h-16 w-full">
+        <img
+          src="{% static 'images/black-logo.png' %}"
+          alt="logo"
+          class="mx-auto"
+          style="height: 4rem"
+        />
+      </div>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      >
+        <!-- Volume -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Volume</h2>
+          <p class="mt-2 text-gray-600">Manage Volume data</p>
+        </a>
+        <!-- Users -->
+        <a
+          href="{% url 'user_overview' %}"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Users</h2>
+          <p class="mt-2 text-gray-600">View and manage Users</p>
+        </a>
+        <!-- Transactions -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Transactions</h2>
+          <p class="mt-2 text-gray-600">Track Transactions</p>
+        </a>
+        <!-- Assets -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Assets</h2>
+          <p class="mt-2 text-gray-600">Manage Assets</p>
+        </a>
+        <!-- KYC -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">KYC</h2>
+          <p class="mt-2 text-gray-600">Manage KYC data</p>
+        </a>
+        <!-- Referrals -->
+        <a
+          href="{% url 'referrals' %}"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Referrals</h2>
+          <p class="mt-2 text-gray-600">View Referrals</p>
+        </a>
+        <!-- Fees -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Fees</h2>
+          <p class="mt-2 text-gray-600">Manage Fees</p>
+        </a>
+        <!-- Discounts -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Discounts</h2>
+          <p class="mt-2 text-gray-600">Manage Discounts</p>
+        </a>
+        <!-- Points -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Points</h2>
+          <p class="mt-2 text-gray-600">Manage Points</p>
+        </a>
+        <!-- History -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">History</h2>
+          <p class="mt-2 text-gray-600">View History</p>
+        </a>
+        <!-- Help -->
+        <a
+          href="#"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Help</h2>
+          <p class="mt-2 text-gray-600">Access Help</p>
+        </a>
+        <!-- Write -->
+        <a
+          href="{% url 'write' %}"
+          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 hover:bg-custom-gradient2"
+        >
+          <h2 class="text-xl font-semibold text-gray-700">Write</h2>
+          <p class="mt-2 text-gray-600">Write new content</p>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

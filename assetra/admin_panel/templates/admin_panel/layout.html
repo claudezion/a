@@ -1,0 +1,363 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Assetra{% endblock %}</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+    <script
+      src="https://cdn.tiny.cloud/1/xbba5kcxwjy586aatsavkv4whu5j44j0lpjhr6np78c7hxvx/tinymce/7/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+  </head>
+  <body class="min-w-[100dvw] min-h-[100dvh] bg-base-100">
+    <nav class="flex h-12 bg-base-200">
+      <a class="flex-1" href="{% url 'landing' %}">
+        <img
+          src="{% static 'images/logo.png' %}"
+          alt="logo"
+          class="mt-2 ml-2 p-[2px]"
+          style="height: 2rem"
+        />
+      </a>
+      <div class="flex-none">
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+            <div class="indicator">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 17h6l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h6m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                />
+              </svg>
+              <span class="badge badge-xs badge-primary indicator-item"></span>
+            </div>
+          </div>
+          <div
+            tabindex="0"
+            class="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
+          >
+            <div class="card-body">
+              <span class="text-lg font-bold">new</span>
+              <span class="text-info">new</span>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown dropdown-end">
+          <div
+            tabindex="0"
+            role="button"
+            class="btn btn-ghost btn-circle avatar"
+          >
+            <div class="w-6 rounded-full">
+              {% if user.profile %}
+              <img
+                alt="Tailwind CSS Navbar component"
+                src="/media/{{ user.profile }}"
+              />
+              {% else %}
+              <img
+                alt="Tailwind CSS Navbar component"
+                src="{% static 'images/profile.png' %}"
+              />
+              {% endif %}
+            </div>
+          </div>
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          >
+            <li>
+              <a class="justify-between" href="{% url 'user' id=user.id %}">
+                Profile
+              </a>
+            </li>
+            <li><a>Settings</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="grid grid-cols-7 gap-4 m-4 h-[90dvh]">
+      <aside class="col-span-1 h-full flex flex-col justify-between">
+        <div class="rounded-xl bg-base-200 shadow p-2">
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path
+                d="M19 3h6c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 19V5h6v14h6zm14 0h-6v-7h6v7zm0-9h-6V5h6v5z"
+              ></path>
+            </svg>
+            Volume
+          </a>
+          <a
+            href="{% url 'user_overview' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+            ><svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 448 512"
+              class="text-xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
+              ></path>
+            </svg>
+            Users
+          </a>
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+            ><svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path
+                fill-rule="evenodd"
+                d="M16.67 13.13C18.04 14.06 19 15.32 19 17v3h4v-3c0-2.18-3.57-3.47-6.33-3.87z"
+              ></path>
+              <circle cx="9" cy="8" r="4" fill-rule="evenodd"></circle>
+              <path
+                fill-rule="evenodd"
+                d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4c-.47 0-.91.1-1.33.24a5.98 5.98 0 0 1 0 7.52c.42.14.86.24 1.33.24zM9 13c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
+              ></path>
+            </svg>
+            Transactions
+          </a>
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="none"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+              ></path>
+              <path
+                d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+              ></path>
+              <path d="M9 17v-5"></path>
+              <path d="M12 17v-1"></path>
+              <path d="M15 17v-3"></path>
+            </svg>
+            Assets
+          </a>
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
+              ></path>
+            </svg>
+            KYC
+          </a>
+          <a
+            href="{% url 'referrals' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 32 32"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M 8 4 C 6.355469 4 5 5.355469 5 7 L 5 15.40625 C 4.230469 14.960938 3.628906 14.5625 3.5 14.5625 C 3.140625 14.5625 3 14.90625 3 15.125 C 3 16.246094 6.335938 18.40625 8.4375 19.1875 C 8.4375 19.1875 7.90625 20.738281 7.90625 22.5 C 7.90625 24.261719 8.992188 28 12.4375 28 C 12.4375 28 15 27.992188 15 25.46875 L 15 20.5 L 17 21.09375 L 17 25.46875 C 17 27.992188 19.5625 28 19.5625 28 C 23.007813 28 24.09375 24.261719 24.09375 22.5 C 24.09375 20.738281 23.5625 19.1875 23.5625 19.1875 C 25.664063 18.40625 29 16.246094 29 15.125 C 29 14.90625 28.859375 14.5625 28.5 14.5625 C 28.371094 14.5625 27.769531 14.960938 27 15.40625 L 27 7 C 27 5.355469 25.644531 4 24 4 Z M 8 6 L 24 6 C 24.566406 6 25 6.433594 25 7 L 25 16.40625 C 23.886719 16.871094 22.601563 17.25 21.28125 17.25 C 19.820313 17.25 18.902344 17.15625 18.28125 17.15625 C 17.078125 17.15625 17 18.4375 17 18.4375 L 17 19.34375 L 14.65625 17.5625 C 14.46875 17.339844 14.167969 17.15625 13.71875 17.15625 C 13.097656 17.15625 12.179688 17.25 10.71875 17.25 C 9.398438 17.25 8.113281 16.871094 7 16.40625 L 7 7 C 7 6.433594 7.433594 6 8 6 Z M 12.3125 10.96875 C 10.835938 10.96875 9.65625 12.113281 9.65625 13.5 C 9.65625 14.886719 10.835938 16 12.3125 16 C 13.789063 16 15 14.886719 15 13.5 C 15 12.113281 13.789063 10.96875 12.3125 10.96875 Z M 19.6875 10.96875 C 18.210938 10.96875 17 12.113281 17 13.5 C 17 14.886719 18.210938 16 19.6875 16 C 21.164063 16 22.34375 14.886719 22.34375 13.5 C 22.34375 12.113281 21.164063 10.96875 19.6875 10.96875 Z"
+              ></path>
+            </svg>
+            Referrals
+          </a>
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M128 176h256v128H128z"></path>
+              <path
+                d="M448 96H64c-8.8 0-16 7.2-16 16v256c0 8.8 6.9 16 15.8 16H448c8.8 0 16-7.2 16-16V112c0-8.8-7.2-16-16-16zm-32 240H96V144h320v192zM80 464h67l22.5-64h-56.4zM279.4 48h-46.8l-11.5 32h69.8zM375 464h67l-23-64h-56.5zM232 400h48v32h-48z"
+              ></path>
+            </svg>
+            Fees
+          </a>
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M128 48v122.8h.2l-.2.2 85.3 85-85.3 85.2.2.2h-.2V464h256V341.4h-.2l.2-.2-85.3-85.2 85.3-85-.2-.2h.2V48H128zm213.3 303.9v71.5H170.7v-71.5l85.3-85.2 85.3 85.2zM256 245.4l-85.3-85.2V87.6h170.7v72.5L256 245.4z"
+              ></path>
+            </svg>
+            Discounts
+          </a>
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M132.8 368c-20.2 0-44.8-24.6-44.8-44.8V160h-9.6C61.7 160 48 173.7 48 190.4V464l58.5-58h215.1c16.7 0 30.4-14.1 30.4-30.9V368H132.8z"
+              ></path>
+              <path
+                d="M429.1 48H149.9C130.7 48 115 63.7 115 82.9V309c0 19.2 15.7 35 34.9 35h238.2l75.9 53V82.9c0-19.2-15.7-34.9-34.9-34.9z"
+              ></path>
+            </svg>
+            Points
+          </a>
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path
+                d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"
+              ></path>
+            </svg>
+            History
+          </a>
+          <a
+            href="{% url 'index' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M289 448h-66v-65h66v65zm-1-98h-64c0-101 96-95.1 96-159 0-35.2-28.8-63.4-64-63.4S192 158 192 192h-64c0-71 57.3-128 128-128s128 56.4 128 127c0 79.9-96 89-96 159z"
+              ></path>
+            </svg>
+            Help
+          </a>
+          <a
+            href="{% url 'write' %}"
+            class="h6 text-center rounded-lg capitalize flex mb-2 justify-start items-center pl-5 px-2 gap-4 cursor-pointer hover:bg-[#2F80ED] shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              class="text-2xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g></g>
+              <path
+                d="M11.667 0h-8.651v1.984h-0.516c-0.827 0-1.5 0.673-1.5 1.5v8.588l2.521 4.956 2.464-4.959v-8.585c0-0.827-0.673-1.5-1.5-1.5h-0.469v-0.984h6.984v5h5v10h-11.5v1h12.5v-11.692l-5.333-5.308zM3.908 14.002h-0.804l-1.104-2.17v-5.848h1v6.027h1v-6.027h0.984v5.851l-1.076 2.167zM4.984 3.484v1.5h-2.984v-1.5c0-0.275 0.225-0.5 0.5-0.5h1.984c0.276 0 0.5 0.225 0.5 0.5zM12 1.742l3.273 3.258h-3.273v-3.258z"
+              ></path>
+            </svg>
+            Write
+          </a>
+        </div>
+
+        <div class="text-center rounded-xl bg-base-200 shadow p-4">
+          <h1 className="text-base font-bold ">Admin Panel</h1>
+          <h3 className="text-base font-semibold ">Version: 1.0.0.00</h3>
+        </div>
+      </aside>
+      <main class="col-span-6 h-full">{% block body %} {% endblock %}</main>
+    </div>
+  </body>
+</html>

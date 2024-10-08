@@ -1,0 +1,117 @@
+{% extends "admin_panel/layout.html" %} {% block body %}
+<div class="container rounded-xl bg-base-200 shadow h-full px-16 py-6">
+  <div class="flex justify-between items-center mb-6">
+    <div class="text-left">
+      <h5 class="h5 font-semibold">Blog List</h5>
+      <h6 class="h6 font-normal">On Ecosystem</h6>
+    </div>
+    <div class="flex items-center">
+        <form method="GET" action="{% url 'search_blogs' %}" class="mr-4">
+            <input
+              type="text"
+              id="defult-search"
+              name="search_term"
+              class="block w-[20dvw] h-2/3 p-4 ps-10 text-sm rounded-full"
+              placeholder="Search by username or email"
+            />
+          </form>
+      <button type="button" class="text-[16px] font-normal">
+        Sort By: Date {{order}}
+      </button>
+    </div>
+  </div>
+  <div>
+    <ul class="space-y-2">
+      {% for blog in blogs %}
+      <li>
+        <a href="{% url 'blog' id=blog.id %}" class="bg-gray-50 p-3 rounded-lg flex justify-between items-center">
+          <span class="text-gray-800">
+            <span class="font-medium">{{ blog.title }}</span>
+            Published on
+            <span class="font-medium"
+              >{{ blog.created_at|date:"F j, Y" }}  written by  {{ blog.author|title }}</span
+            >
+          </span>
+          <span
+            class="{% if blog.is_published %}text-green-600{% else %}text-red-600{% endif %} font-medium"
+          >
+            {{ blog.is_published | yesno:"Success,Unsuccessful" }}
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="absolute bottom-10 right-20">
+    <span class="step-links flex gap-4">
+      <span> Item per pages: 10 </span>
+      <span class="current">
+        {{ blogs.number }} of {{ blogs.paginator.num_pages }}
+      </span>
+      {% if blogs.has_previous %}
+      <a
+        class="mt-[6px]"
+        title="Previous"
+        href="?page={{ blogs.previous_page_number }}"
+        ><svg
+          width="10"
+          height="12"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.79922 3.0001L3.79922 9.0001L9.79922 15.0001L8.59922 17.4001L0.199219 9.0001L8.59922 0.600098L9.79922 3.0001Z"
+            fill="{% if not blogs.has_previous %}#545454{% else %}#dddddd{% endif %}"
+          /></svg></a>
+      {% else %}
+      <div class="mt-[6px] cursor-not-allowed">
+        <svg
+          width="10"
+          height="12"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.79922 3.0001L3.79922 9.0001L9.79922 15.0001L8.59922 17.4001L0.199219 9.0001L8.59922 0.600098L9.79922 3.0001Z"
+            fill="#545454"
+          />
+        </svg>
+      </div>
+      {% endif %} {% if blogs.has_next %}
+      <a
+        class="mt-[6px]"
+        title="Next"
+        href="?page={{ blogs.next_page_number }}"
+        ><svg
+          width="10"
+          height="12"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.199219 15.0001L6.19922 9.0001L0.199219 3.0001L1.39922 0.600098L9.79922 9.0001L1.39922 17.4001L0.199219 15.0001Z"
+            fill="{% if not blogs.has_next %}#545454{% else %}#dddddd{% endif %}"
+          /></svg></a>
+      {% else %}
+      <div class="mt-[6px] cursor-not-allowed">
+        <svg
+          width="10"
+          height="12"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.199219 15.0001L6.19922 9.0001L0.199219 3.0001L1.39922 0.600098L9.79922 9.0001L1.39922 17.4001L0.199219 15.0001Z"
+            fill="#545454"
+          />
+        </svg>
+      </div>
+      {% endif %}
+    </span>
+  </div>
+</div>
+{% endblock %}

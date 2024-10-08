@@ -1,0 +1,135 @@
+{% extends "admin_panel/layout.html" %} {% load static %} {% block body %}
+<div class="container rounded-xl bg-base-200 shadow h-full px-16 py-6">
+  <div class="flex justify-between items-center mb-6">
+    <div class="text-left">
+      <h5 class="h5 font-semibold">User List</h5>
+      <h6 class="h6 font-normal">On Ecosystem</h6>
+    </div>
+    <div class="flex items-center">
+      <form method="GET" action="{% url 'search_users' %}" class="mr-4">
+        <input
+          type="text"
+          id="defult-search"
+          name="search_term"
+          class="block w-[20dvw] h-2/3 p-4 ps-10 text-sm rounded-full"
+          placeholder="Search by username or email"
+        />
+      </form>
+      <button type="button" class="text-[16px] font-normal">
+        Sort By: Date {{order}}
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="bg-custom-gradient p-3 rounded-lg grid grid-cols-12 mb-2">
+      <div class="col-span-1"></div>
+      <div class="col-span-4">Username</div>
+      <div class="col-span-4">Email</div>
+      <div class="col-span-1">Verified</div>
+      <div class="col-span-2">Joined On</div>
+    </div>
+    <ul class="space-y-2 overflow-y-auto max-h-[400px] scrollbar-hide">
+      {% for user in users %}
+      <li>
+        <a
+          href="{% url 'user' id=user.id %}"
+          class="bg-gray-50 p-3 rounded-lg grid grid-cols-12 hover:bg-custom-gradient2"
+        >
+          <div class="col-span-1">
+            {% if user.profile %}
+            <img
+              src="/media/{{ user.profile }}"
+              alt="pp"
+              class="h-5 w-5 rounded-full object-cover"
+            />
+            {% else %}
+            <img
+              src="{% static 'images/profile.png' %}"
+              alt="pp"
+              class="h-5 w-5 rounded-full object-cover"
+            />
+            {% endif %}
+          </div>
+          <div class="col-span-4">{{ user.username }}</div>
+          <div class="col-span-4">{{ user.email }}</div>
+          <div
+            class="col-span-1 {% if user.verified %}text-green-600{% else %}text-red-600{% endif %}"
+          >
+            {{ user.verified | yesno:"Yes,No" }}
+          </div>
+          <div class="col-span-2">{{ user.date_joined|date:"F j, Y" }}</div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="absolute bottom-10 right-20">
+    <span class="step-links flex gap-4">
+      <span> Item per pages: 10 </span>
+      <span class="current">
+        {{ users.number }} of {{ users.paginator.num_pages }}
+      </span>
+      {% if users.has_previous %}
+      <a
+        class="mt-[6px]"
+        title="Previous"
+        href="?page={{ users.previous_page_number }}"
+        ><svg
+          width="10"
+          height="12"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.79922 3.0001L3.79922 9.0001L9.79922 15.0001L8.59922 17.4001L0.199219 9.0001L8.59922 0.600098L9.79922 3.0001Z"
+            fill="{% if not users.has_previous %}#545454{% else %}#dddddd{% endif %}"
+          /></svg></a>
+      {% else %}
+      <div class="mt-[6px] cursor-not-allowed">
+        <svg
+          width="10"
+          height="12"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.79922 3.0001L3.79922 9.0001L9.79922 15.0001L8.59922 17.4001L0.199219 9.0001L8.59922 0.600098L9.79922 3.0001Z"
+            fill="#545454"
+          />
+        </svg>
+      </div>
+      {% endif %} {% if users.has_next %}
+      <a class="mt-[6px]" title="Next" href="?page={{ users.next_page_number }}"
+        ><svg
+          width="10"
+          height="12"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.199219 15.0001L6.19922 9.0001L0.199219 3.0001L1.39922 0.600098L9.79922 9.0001L1.39922 17.4001L0.199219 15.0001Z"
+            fill="{% if not users.has_next %}#545454{% else %}#dddddd{% endif %}"
+          /></svg></a>
+      {% else %}
+      <div class="mt-[6px] cursor-not-allowed">
+        <svg
+          width="10"
+          height="12"
+          viewBox="0 0 10 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.199219 15.0001L6.19922 9.0001L0.199219 3.0001L1.39922 0.600098L9.79922 9.0001L1.39922 17.4001L0.199219 15.0001Z"
+            fill="#545454"
+          />
+        </svg>
+      </div>
+      {% endif %}
+    </span>
+  </div>
+</div>
+{% endblock %}

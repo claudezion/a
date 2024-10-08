@@ -1,0 +1,87 @@
+{% extends "admin_panel/layout.html" %} {% load static %} {% block body %}
+<div class="container rounded-xl bg-base-200 shadow h-full px-16 py-6">
+  <div class="flex justify-between items-center mb-6">
+    <div class="text-left">
+      <h5 class="h5 font-semibold">User Overview</h5>
+      <h6 class="h6 font-normal">On Ecosystem</h6>
+    </div>
+    <div class="flex items-center">
+      <form method="GET" action="{% url 'search_users' %}" class="mr-4">
+        <input
+          type="text"
+          id="defult-search"
+          name="search_term"
+          class="block w-[20dvw] h-2/3 p-4 ps-10 text-sm rounded-full"
+          placeholder="Search by username or email"
+        />
+      </form>
+      <button type="button" class="text-[16px] font-normal">
+        Sort By: Date {{order}}
+      </button>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-blue-100 p-4 rounded-lg">
+      <h2 class="text-xl font-semibold text-blue-800">Total Users</h2>
+      <p class="text-3xl font-bold text-blue-600">{{ users.count }}</p>
+    </div>
+    <div class="bg-green-100 p-4 rounded-lg">
+      <h2 class="text-xl font-semibold text-green-800">Verified Users</h2>
+      <p class="text-3xl font-bold text-green-600">
+        {{ verified_users }}
+      </p>
+    </div>
+    <div class="bg-red-100 p-4 rounded-lg">
+      <h2 class="text-xl font-semibold text-red-800">Unverified Users</h2>
+      <p class="text-3xl font-bold text-red-600">
+        {{ unverified_users }}
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">All Users:</h3>
+    <div class="bg-custom-gradient p-3 rounded-lg grid grid-cols-12 mb-2">
+      <div class="col-span-1"></div>
+      <div class="col-span-4">Username</div>
+      <div class="col-span-4">Email</div>
+      <div class="col-span-1">Verified</div>
+      <div class="col-span-2">Joined On</div>
+    </div>
+    <ul class="space-y-2 overflow-y-auto max-h-[350px] scrollbar-hide">
+      {% for user in users %}
+      <li>
+        <a
+          href="{% url 'user' id=user.id %}"
+          class="bg-gray-50 p-3 rounded-lg grid grid-cols-12 hover:bg-custom-gradient2"
+        >
+          <div class="col-span-1">
+            {% if user.profile %}
+            <img
+              src="/media/{{ user.profile }}"
+              alt="pp"
+              class="h-5 w-5 rounded-full object-cover"
+            />
+            {% else %}
+            <img
+              src="{% static 'images/profile.png' %}"
+              alt="pp"
+              class="h-5 w-5 rounded-full object-cover"
+            />
+            {% endif %}
+          </div>
+          <div class="col-span-4">{{ user.username }}</div>
+          <div class="col-span-4">{{ user.email }}</div>
+          <div
+            class="col-span-1 {% if user.verified %}text-green-600{% else %}text-red-600{% endif %}"
+          >
+            {{ user.verified | yesno:"Yes,No" }}
+          </div>
+          <div class="col-span-2">{{ user.date_joined|date:"F j, Y" }}</div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

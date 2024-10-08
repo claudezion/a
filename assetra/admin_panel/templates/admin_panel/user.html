@@ -1,0 +1,66 @@
+{% extends "admin_panel/layout.html" %} {% load static %} {% block body %}
+<div class="container rounded-xl bg-base-200 shadow h-full px-16 py-6">
+  <div class="flex justify-between items-center mb-6">
+    <div class="text-left">
+      <h5 class="h5 font-semibold">User</h5>
+      <h6 class="h6 font-normal">On Ecosystem</h6>
+    </div>
+    <div class="flex items-center">
+      <form method="GET" action="{% url 'search_users' %}" class="mr-4">
+        <input
+          type="text"
+          id="defult-search"
+          name="search_term"
+          class="block w-[20dvw] h-2/3 p-4 ps-10 text-sm rounded-full"
+          placeholder="Search by username or email"
+        />
+      </form>
+      <button type="button" class="text-[16px] font-normal">
+        Sort By: Date ↓
+      </button>
+    </div>
+  </div>
+
+  <div class="flex mt-6">
+    <div
+      class="grid grid-cols-2 gap-4 mx-auto p-4 bg-custom-gradient shadow rounded-xl"
+    >
+      <div class="col-span-2 flex justify-center">
+        {% if user.profile %}
+        <img
+          src="/media/{{ user.profile }}"
+          alt=""
+          class="w-24 h-24 rounded-full object-cover border-2 border-green-400"
+        />
+        {% else %}
+        <img
+          src="{% static 'images/profile.png' %}"
+          alt=""
+          class="w-24 h-24 rounded-full object-cover border-2 border-red-400"
+        />
+        {% endif %}
+      </div>
+      <p class="font-medium">Username:</p>
+      <p>{{user.username}}</p>
+      <p class="font-medium">Email:</p>
+      <p>{{user.email}}</p>
+      <p class="font-medium">First Name:</p>
+      <p>{{user.first_name}}</p>
+      <p class="font-medium">Last Name:</p>
+      <p>{{user.last_name}}</p>
+      <p class="font-medium">Country:</p>
+      <p>{{user.country}}</p>
+      <p class="font-medium">Date of Birth:</p>
+      <p>{{user.dob}}</p>
+      <p class="font-medium">Verified:</p>
+      {% if user.verified %}
+      <p class="text-green-500">Yes</p>
+      {% else %}
+      <p class="text-red-500">No</p>
+      {% endif %}
+      <p class="font-medium">Mobile Number:</p>
+      <p>{{user.mobile}}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

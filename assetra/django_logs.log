@@ -1,0 +1,11 @@
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 2594
+"GET /users HTTP/1.1" 200 24578
+User claude logged out at 2024-10-07 14:26:31.938059+00:00
+"GET /logout HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 2591
+"GET /login HTTP/1.1" 200 2160
+User claude logged in at 2024-10-07 14:26:37.491361+00:00
+"POST /login HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 2594
+C:\gtx\assetra\assetra\settings.py changed, reloading.

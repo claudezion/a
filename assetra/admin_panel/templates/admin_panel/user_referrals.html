@@ -1,0 +1,61 @@
+{% extends "admin_panel/layout.html" %} {% block body %}
+<div class="container rounded-xl bg-base-200 shadow h-full px-16 py-6 flex flex-col justify-between">
+    <div class="flex justify-between items-center mb-6">
+      <div class="text-left">
+        <h5 class="h5 font-semibold">Search Referrals</h5>
+        <h6 class="h6 font-normal">On Ecosystem</h6>
+      </div>
+      <div class="flex items-center">
+        <form method="GET" action="{% url 'user_referrals' %}" class="mr-4">
+          <input
+            type="text"
+            id="defult-search"
+            name="search_term"
+            class="block w-[20dvw] h-2/3 p-4 ps-10 text-sm rounded-full"
+            placeholder="Search by username or email"
+          />
+        </form>
+        <button type="button" class="text-[16px] font-normal">
+          Sort By: Date {{order}}
+        </button>
+      </div>
+    </div>
+    <div class="bg-custom-gradient rounded-lg p-6 my-auto">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Search Referrals by Username or Email</h2>
+
+      <form method="GET" action="{% url 'user_referrals' %}" class="space-y-4">
+        <div>
+          <label for="search_term" class="block text-sm font-medium text-gray-700 mb-1">Username or Email:</label>
+          <input type="text" id="search_term" name="search_term" placeholder="Enter username or email" required
+                 class="w-full px-3 py-2 rounded-md shadow-sm bg-custom-gradient border border-[#2d6fd1]">
+        </div>
+        <button type="submit" class="w-full md:w-auto text-white rounded-md px-4 py-2 transition duration-300 ease-in-out bg-custom-gradient2 hover:bg-sakura-gradient">
+          Search
+        </button>
+      </form>
+
+      {% if error_message %}
+        <p class="mt-4 text-red-600">{{ error_message }}</p>
+      {% endif %}
+
+      {% if referrals_by_user %}
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Referrals by {{ search_user.username }}:</h3>
+          <ul class="divide-y divide-gray-200">
+            {% for referral in referrals_by_user %}
+              <li class="py-3 flex justify-between items-center">
+                <span class="text-gray-800">{{ referral.referred_user.username }}</span>
+                <span class="text-sm font-medium {% if referral.success %}text-green-600{% else %}text-red-600{% endif %}">
+                  {{ referral.success|yesno:"Success,Failed" }}
+                </span>
+              </li>
+            {% empty %}
+              <li class="py-3 text-gray-600">No referrals found for {{ search_user.username }}.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "admin_panel/layout.html" %} {% block body %}
+<div class="container rounded-xl bg-base-200 shadow h-full px-16 py-6">
+  <div class="flex justify-between items-center mb-6">
+    <div class="text-left">
+      <h5 class="h5 font-semibold">Blog Overview</h5>
+      <h6 class="h6 font-normal">On Ecosystem</h6>
+    </div>
+    <div class="flex items-center">
+        <form method="GET" action="{% url 'search_blogs' %}" class="mr-4">
+            <input
+              type="text"
+              id="defult-search"
+              name="search_term"
+              class="block w-[20dvw] h-2/3 p-4 ps-10 text-sm rounded-full"
+              placeholder="Search by username or email"
+            />
+          </form>
+      <button type="button" class="text-[16px] font-normal">
+        Sort By: Date {{order}}
+      </button>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-blue-100 p-4 rounded-lg">
+      <h2 class="text-xl font-semibold text-blue-800">Total Blogs</h2>
+      <p class="text-3xl font-bold text-blue-600">{{ blogs.count }}</p>
+    </div>
+    <div class="bg-green-100 p-4 rounded-lg">
+      <h2 class="text-xl font-semibold text-green-800">Published Blogs</h2>
+      <p class="text-3xl font-bold text-green-600">
+        {{ published_blog }}
+      </p>
+    </div>
+    <div class="bg-red-100 p-4 rounded-lg">
+      <h2 class="text-xl font-semibold text-red-800">Unpublished Blogs</h2>
+      <p class="text-3xl font-bold text-red-600">
+        {{ unpublished_blog }}
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-4">All Blogs:</h3>
+    <ul class="space-y-2 overflow-y-auto max-h-[400px] scrollbar-hide">
+      {% for blog in blogs %}
+      <li>
+        <a href="{% url 'blog' id=blog.id %}" class="bg-gray-50 p-3 rounded-lg flex justify-between items-center">
+          <span class="text-gray-800">
+            <span class="font-medium">{{ blog.title }}</span>
+            Published on
+            <span class="font-medium"
+              >{{ blog.created_at|date:"F j, Y" }}  written by  {{ blog.author|title }}</span
+            >
+          </span>
+          <span
+            class="{% if blog.is_published %}text-green-600{% else %}text-red-600{% endif %} font-medium"
+          >
+            {{ blog.is_published | yesno:"Success,Unsuccessful" }}
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
